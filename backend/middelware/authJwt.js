@@ -5,22 +5,18 @@ const config = require('../config/auth.config')
 const verifyToken = async (req, res, next) => {
     const authHeader = req.headers.authorization;
     try {
-
         let token = await authHeader && authHeader.split('Bearer ')[1]
-        console.log(typeof token)
+        console.log(token)
         if (!token) {
-
-            console.log(token)
-            console.log("hl")
             return res.status(403).send({
                 message: 'No token provided'
             });
-
         }
-        jwt.verify(token, config.secret, (err, user) => {
+
+        jwt.verify(token, config.secret, (error, user) => {
             console.log(config.secret)
-            if (err) {
-                console.log(err.message)
+            if (error) {
+                console.log(error.message)
                 return res.status(401).send({
                     message: 'Unauthorized'
                 });
@@ -29,7 +25,6 @@ const verifyToken = async (req, res, next) => {
             req.user = user
             next();
         });
-
     } catch (error) {
         console.log(error.message)
     }

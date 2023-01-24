@@ -11,17 +11,18 @@ const myShelf = (req, res) => {
 
 }
 
+
+
 const createBook = async (req, res) => {
     try {
-        const data = {
-            title: req.body.title,
-            isbnNo: req.body.isbnNo,
-            genre: req.body.genre,
-            author: req.body.author,
-            description: req.body.description,
-            image: req.body.image,
-        }
-        console.log(data)
+        // const data = {
+        //     title: req.body.title,
+        //     isbnNo: req.body.isbnNo,
+        //     genre: req.body.genre,
+        //     author: req.body.author,
+        //     description: req.body.description,
+        //     image: req.body.image,
+        // }
         const book = await Book.findOrCreate({
             where: {
                 title: req.body.title,
@@ -39,12 +40,15 @@ const createBook = async (req, res) => {
                 image: req.body.image,
             }
         })
-        console.log(book, "book")
+
         if (book) {
-            res.status(200).send(book)
+            return res.status(200).send({
+                book, message: "book was created"
+            })
         } else {
+            console.log(error.message)
             return res.status(409).send({
-                message: err.message || " Some error occured when registering book"
+                message: error.message || " Some error occured when registering book"
             })
         }
 
@@ -54,11 +58,8 @@ const createBook = async (req, res) => {
 }
 //does req contain user_id and book_id and book object?
 const joinUserBook = async (req, res) => {
-    console.log(req.body, "hj")
     const { isbnNo } = req.body
-    console.log(isbnNo)
     const { id } = req.user
-
     try {
         await createBook(req)
         const book = await Book.findOne({ where: { isbnNo: isbnNo } })
@@ -68,12 +69,14 @@ const joinUserBook = async (req, res) => {
         const user = await User.findOne({ where: { id: id } })
         if (!user) {
             res.status(404).send("user not found");
-
         }
-        user.addBook(book, { through: db.userBooks });
-        console.log(`added book ${book.id} for user ${user.id}`)
-        res.status(200).send(user)
-
+        try {
+            user.addBook(book, { through: db.userBooks });
+            console.log(`added book ${book.title} for user ${user.dataValues.id}`)
+            res.status(200).send(user)
+        } catch (error) {
+            console.log(error.message)
+        }
     } catch (error) {
         console.log(error.message)
     }
@@ -122,7 +125,18 @@ const createApplication = async (req, res) => {
     }
 }
 //const respondents (list of users+ book to frontend) = lookupfunction()
-//
+const getUserBooks = async (req, res) => {
+    const { id } = req.user
+    try {
+        const books = await Book.findAll({ include: { model: User, as: 'users', where: { id: id } } })
+        if (!books) {
+            return res.status(404).send("books not found")
+        } console.log(books)
+        return res.status(201).send(books)
+    } catch (error) {
+        console.log(error.message)
+    }
+}
 //in frontend go throguh list of users - add object- new req- book id/user(lendee) accept/deny
 //on user(lender)send req accepted
 
@@ -134,5 +148,6 @@ module.exports = {
     myShelf,
     joinUserBook,
     findUsersWithBook,
-    createApplication
+    createApplication,
+    getUserBooks
 }

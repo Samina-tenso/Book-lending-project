@@ -12,8 +12,9 @@ export const ProtectedRoute = ({ children }) => {
     }
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user) {
-        return <Navigate to='/login' />
-    } return (<><Navbar><Container> <Button onClick={handleLoggout}>logout</Button><Button> Add books</Button></Container></Navbar><Outlet /></ >)
+        navigate('/login')
+        return
+    } return (<><Navbar><Container> <Button onClick={handleLoggout}>logout</Button><Link to={'books'}>Add books</Link><Link to={'myShelf'}>myshelf</Link></Container></Navbar><Outlet /></ >)
 
 }
 export default ProtectedRoute; 

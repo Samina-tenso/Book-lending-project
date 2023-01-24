@@ -1,8 +1,8 @@
 import { useAuth } from './useAuth'
-import Container from 'react-bootstrap/esm/Container';
+import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/esm/Form'
-import FormGroup from 'react-bootstrap/esm/FormGroup'
-import FormLabel from 'react-bootstrap/esm/FormLabel';
+import FormGroup from 'react-bootstrap/FormGroup'
+import FormLabel from 'react-bootstrap/FormLabel';
 import { useState } from 'react';
 import Auth from './auth.api'
 import { useNavigate } from 'react-router-dom';

@@ -6,12 +6,12 @@ const authJWT = require('../middelware/authJwt')
 const userController = require('../controllers/user.controller');
 const authController = require('../controllers/auth.controller')
 const { signup, signin } = authController
-const { joinUserBook, findUsersWithBook, myShelf } = userController
+const { joinUserBook, findUsersWithBook, getUserBooks } = userController
 const userRouter = require('express').Router()
 userRouter.post("/auth/signup", userAuth.checkDuplicateUsernameOrEmail, signup)
 userRouter.post("/auth/signin/", signin)
-userRouter.get("/myshelf/user", authJWT.verifyToken, myShelf)// get list of user books
-userRouter.post("/myshelf/user", authJWT.verifyToken, joinUserBook)
+userRouter.get("/myshelf/:username/get-books", authJWT.verifyToken, getUserBooks)// get list of user books
+userRouter.post("/myshelf/books/add-book", authJWT.verifyToken, joinUserBook)
 
 
 module.exports = userRouter

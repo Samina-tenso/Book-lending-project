@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Login from './Pages/auth/Login'
 import Myshelf from './Pages/auth/Myshelf';
+import Books from './Pages/auth/Books';
 import { ProtectedRoute } from './Pages/auth/Auth'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -23,8 +24,13 @@ export const router = createBrowserRouter([
       {
         path: ":username",
         element: < Myshelf />
+      },
+      {
+        path: "books",
+        element: <Books />
       }
-    ]
+    ],
+
   }
 ])
 function App() {

@@ -33,7 +33,8 @@ module.exports = (sequelize) => {
                 'Memoir',
                 'Essay',
                 'Textbook',
-                'Fantasy'
+                'Fantasy',
+                'Scifi'
             ], defaultValue: 'Essay',
         },
         author: {

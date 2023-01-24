@@ -1,7 +1,12 @@
+import MyBooks from "./MyBooks"
+import { Outlet } from "react-router-dom"
 const Myshelf = () => {
-    console.log("GJk")
+
     return (
-        <h1> myshelf</h1>
+        <>
+            <h1> myshelf</h1>
+            <MyBooks />
+        </>
     )
 }
 
