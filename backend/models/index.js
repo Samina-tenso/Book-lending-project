@@ -15,9 +15,10 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   console.log('sequelize with environment variable');
-  console.log(`sequelize env ${process.env}`);
+  console.log(`sequelize env ${process.env.PGDATABASE}`);
   sequelize = new Sequelize(process.env.PGDATABASE, `${process.env.PGUSER}`, `${process.env.PGPASSWORD}`, {
     host: process.env.PGHOST,
+    port: process.env.PGPORT,
     dialect: 'postgres'
   })
 };
