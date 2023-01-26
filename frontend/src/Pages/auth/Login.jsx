@@ -5,10 +5,11 @@ import FormGroup from 'react-bootstrap/FormGroup'
 import FormLabel from 'react-bootstrap/FormLabel';
 import { useState } from 'react';
 import Auth from './auth.api'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 const Login = () => {
 
     const navigate = useNavigate()
+    const { username } = useParams()
 
     const [formData, setFormData] = useState({
         username: '',
@@ -22,7 +23,7 @@ const Login = () => {
         try {
             let { username } = await Auth.login(formData)
             console.log(username)
-            navigate(`/myShelf/${username}`);
+            navigate(`/my-shelf/${username}`);
             //  window.location.reload();
 
         } catch (error) {

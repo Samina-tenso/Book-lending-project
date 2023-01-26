@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Login from './Pages/auth/Login'
 import Myshelf from './Pages/auth/Myshelf';
 import Books from './Pages/auth/Books';
+import BooksToLend from './Pages/auth/BooksToLend';
 import { ProtectedRoute } from './Pages/auth/Auth'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,13 +13,12 @@ import {
 } from 'react-router-dom'
 
 
-
 export const router = createBrowserRouter([
   {
-    path: "auth",
+    path: "auth/signin",
     element: <Login />
   }, {
-    path: "/myShelf",
+    path: "/my-shelf",
     element: <ProtectedRoute />,
     children: [
       {
@@ -26,8 +26,12 @@ export const router = createBrowserRouter([
         element: < Myshelf />
       },
       {
-        path: "books",
+        path: ":username/books",
         element: <Books />
+      },
+      {
+        path: ":username/books-available",
+        element: <BooksToLend />
       }
     ],
 

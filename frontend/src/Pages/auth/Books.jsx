@@ -5,14 +5,7 @@ import { useAddBook, useGetBooks } from './book.api'
 const Books = () => {
     const [books, setBooks] = useState()
     const [message, setMessage] = useState()
-    const [oneBook, setBook] = useState({
-        title: '',
-        isbnNo: '',
-        genre: 'Scifi',
-        author: '',
-        description: '',
-        image: ''
-    })
+
     useEffect(() => {
         useGetBooks().then((response) => {
             console.log(response.items)
@@ -20,9 +13,7 @@ const Books = () => {
             console.log(books)
         })
     }, [])
-    // useEffect(() => {
 
-    // }, [oneBook])
     const AddBook = (e, title, isbNo, author, description, image) => {
         e.preventDefault()
         console.log(title)
@@ -35,7 +26,7 @@ const Books = () => {
             image: image
         }
         try {
-            setBook(book)
+
             useAddBook(book).then((response) => {
                 if (response)
                     console.log(response)

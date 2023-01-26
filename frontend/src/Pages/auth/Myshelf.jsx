@@ -1,10 +1,9 @@
 import MyBooks from "./MyBooks"
-import { Outlet } from "react-router-dom"
 const Myshelf = () => {
 
     return (
         <>
-            <h1> myshelf</h1>
+            <h1> My Shelf</h1>
             <MyBooks />
         </>
     )

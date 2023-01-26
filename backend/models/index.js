@@ -32,6 +32,12 @@ db.application = require('../models/application.model.js')(sequelize, Sequelize)
 //userBook table
 db.users.belongsToMany(db.books, { through: db.userBooks, foreignKey: 'user_id', as: "books" })
 db.books.belongsToMany(db.users, { through: db.userBooks, foreignKey: 'book_id', as: "users" })
+
+// db.users.hasMany(db.userBooks)
+// db.userBooks.belongsTo(db.users)
+db.books.hasMany(db.userBooks, { foreignKey: 'id' })
+db.userBooks.belongsTo(db.books, { foreignKey: 'book_id' })
+
 //application table
 // db.users.belongsToMany(db.books, { through: applicationModel, foreignKey: 'user_id', as: "books" })
 // db.books.belongsToMany(db.users, { through: applicationModel, foreignKey: 'book_id', as: "users" })

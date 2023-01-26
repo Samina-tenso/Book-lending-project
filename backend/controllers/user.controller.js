@@ -80,16 +80,17 @@ const joinUserBook = async (req, res) => {
     } catch (error) {
         console.log(error.message)
     }
-
 }
 //lookup users/lenders with book return list of users/lenders and book
 
 const findUsersWithBook = async (req, res) => {
     try {
-        const { count, rows } = await userBooks.findAndCountAll({ where: { book_id: book_id }, limit: 10 })
-        console.log(count, rows)
+        const { id } = req.body
+        const { count, rows } = await userBooks.findAndCountAll({ where: { book_id: id }, limit: 10 })
+
         if (rows) {
-            res.status(200).send(rows)
+            console.log(count, rows)
+            // res.status(200).send(rows)
         } else {
             res.status(404).send(`no users found for book with id ${book_id}`)
         }
@@ -101,7 +102,6 @@ const findUsersWithBook = async (req, res) => {
 //add a req for every user/lender+ bookid(FK) +lendeeId + date request = requested
 const createApplication = async (req, res) => {
     // get user id of rows for lender 
-
     Application.create(data)
     try {
         const data = {
@@ -114,7 +114,7 @@ const createApplication = async (req, res) => {
         const application = await Application.findOrCreate(data)
         console.log(application, "application")
         if (application) {
-            res.status(200).send(application)
+            res.status(201).send(application)
         } else {
             return res.status(409).send({
                 message: err.message || " Some error occured when registering application"
@@ -137,6 +137,19 @@ const getUserBooks = async (req, res) => {
         console.log(error.message)
     }
 }
+
+const getAvailableBooks = async (req, res) => {
+    try {
+        const books = await Book.findAll({ include: { model: userBooks, where: { status: "AV" } } })
+        if (!books) {
+            return res.status(404).send("no available books found")
+        } return res.status(201).send(books)
+
+    } catch (error) {
+        console.log(error.message)
+    }
+
+}
 //in frontend go throguh list of users - add object- new req- book id/user(lendee) accept/deny
 //on user(lender)send req accepted
 
@@ -149,5 +162,6 @@ module.exports = {
     joinUserBook,
     findUsersWithBook,
     createApplication,
-    getUserBooks
+    getUserBooks,
+    getAvailableBooks
 }
