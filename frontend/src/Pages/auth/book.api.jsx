@@ -26,7 +26,7 @@ export const useAddBook = async (book) => {
     console.log(book)
     try {
         const response = await axios.post(`${API_URL}/my-shelf/:username/books/add-book`, book, { headers: authHeader() })
-        if (response.status == 200) {
+        if (response.status == 201) {
             console.log(response)
         } else { console.log(error.message) }
     } catch (error) {

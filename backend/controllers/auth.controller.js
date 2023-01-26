@@ -21,13 +21,20 @@ const signup = async (req, res) => {
         const user = await User.create(data)
         if (user) {
             //jwt.sign
-            res.status(201).send(user)
-            return
+            let token = jwt.sign({ id: user.id }, config.secret, {
+                expiresIn: 86400//24 hr
+            })
+            res.status(201).send({
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                accessToken: token
+            })
         } else {
+            console.log(error.message)
             res.status(409).send({
                 message: err.message || " Some error occured when registering user"
             });
-            return
         }
     } catch (error) {
         console.log(error)

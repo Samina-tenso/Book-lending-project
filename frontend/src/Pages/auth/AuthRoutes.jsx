@@ -10,11 +10,11 @@ export const ProtectedRoute = () => {
     const navigate = useNavigate()
     const handleLoggout = () => {
         Auth.logout();
-        navigate('/auth/signin');
+        navigate('/');
     }
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user) {
-        navigate('/auth/signin')
+        navigate('/')
         return
     } return (<><Navbar  ><Container fluid >
         <Button onClick={handleLoggout}>Logout</Button>

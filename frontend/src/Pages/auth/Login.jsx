@@ -20,18 +20,12 @@ const Login = () => {
         console.log(formData)
         e.preventDefault();
         try {
-            let { username } = await Auth.login(formData)
+            let { username } = await Auth.signin(formData)
             console.log(username)
             navigate(`/my-shelf/${username}`);
-            //  window.location.reload();
-
         } catch (error) {
             console.log(error)
         }
-
-
-
-        //login data    
     }
 
     const handleChange = (e) => {
