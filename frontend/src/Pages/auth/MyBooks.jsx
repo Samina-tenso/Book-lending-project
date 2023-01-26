@@ -20,7 +20,7 @@ const MyBooks = () => {
             <>< h1 >My Books </h1 >
                 <Container >
                     <Row>{myBooks.map((book) => (
-                        <Col sm={3}>
+                        <Col>
                             <Card className='m-2'>
                                 <Card.Body>
                                     <Card.Title>{book.title}</Card.Title>

@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { useEffect } from 'react';
-import { useState } from 'react';
 
 const API_URL = "http://localhost:8080"
 
@@ -13,7 +11,6 @@ function authHeader() {
     }
 }
 
-
 export const useGetBooks = async () => {
     try {
         const response = await axios.get("https://www.googleapis.com/books/v1/volumes?q=james+s.a+corey&maxResults=10&key=AIzaSyAkz0H-upklTtRpPWxJpwkBWY-T3BX2X0w")
@@ -24,8 +21,6 @@ export const useGetBooks = async () => {
         console.log(error.message)
     }
 }
-
-
 
 export const useAddBook = async (book) => {
     console.log(book)
@@ -63,9 +58,9 @@ export const getAvailableBooks = async () => {
     }
 }
 
-export const findUsersBook = async () => {
+export const findUsersBook = async (id,) => {
     try {
-        const response = await axios.get(`${API_URL}/my-shelf/:username/find-lenders`)
+        const response = await axios.get(`${API_URL}/my-shelf/:username/find-lenders`, id, { headers: authHeader() })
         if (response) {
             console.log(response.data)
             return response.data

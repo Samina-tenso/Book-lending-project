@@ -1,7 +1,8 @@
 const db = require('../models')
 const User = db.users;
 const Book = db.books;
-const { userBooks } = require('../models');
+const { userBooks, sequelize } = require('../models');
+const { Op } = require("sequelize")
 const Application = db.application;
 
 
@@ -85,11 +86,22 @@ const joinUserBook = async (req, res) => {
 
 const findUsersWithBook = async (req, res) => {
     try {
+        const user_id = req.user.id
+        //const lenderArray = [];
         const { id } = req.body
-        const { count, rows } = await userBooks.findAndCountAll({ where: { book_id: id }, limit: 10 })
-
+        const { count, rows } = await userBooks.findAndCountAll({ where: { book_id: id, [Op.not]: { user_id: user_id } }, limit: 10 })
         if (rows) {
-            console.log(count, rows)
+            rows.map((item) => {
+                let lender = item.dataValues.user_id
+                Application.create({
+                    lender_id: lender,
+                    lendee_id: user_id,
+                    book_id: id,
+                }).then((response) => {
+                    return console.log(response)
+                })
+            })
+            //Application.create(id, lenderArray, user_id)
             // res.status(200).send(rows)
         } else {
             res.status(404).send(`no users found for book with id ${book_id}`)
@@ -104,6 +116,10 @@ const createApplication = async (req, res) => {
     // get user id of rows for lender 
     Application.create(data)
     try {
+
+        lenderArray.map((lender) => {
+            appli
+        })
         const data = {
             lender_id: req.body.lender_id,
             lendee_id: req.body.lendee_id,

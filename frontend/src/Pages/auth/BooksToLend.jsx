@@ -13,18 +13,16 @@ const BooksToLend = () => {
     }, [])
 
     const lendBook = (e, id) => {
-        findUsersBook().then((response) => {
+        findUsersBook(id).then((response) => {
             console.log(response)
         })
     }
-
-
     return (
         books ? (
             <>< h1 > Books to lend </h1 >
-                <Container >
+                <Container fluid>
                     <Row>{books.map((book) => (
-                        <Col sm={3}>
+                        <Col >
                             <Card className='m-2'>
                                 <Card.Body>
                                     <Card.Title>{book.title}</Card.Title>
