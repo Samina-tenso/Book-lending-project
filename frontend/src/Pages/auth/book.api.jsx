@@ -57,9 +57,11 @@ export const getAvailableBooks = async () => {
         console.log(error)
     }
 }
-
-export const findUsersBook = async (id,) => {
+//auth does not go through postman works
+export const findUsersBook = async (id) => {
+    console.log(id)
     try {
+        console.log(authHeader())
         const response = await axios.get(`${API_URL}/my-shelf/:username/find-lenders`, id, { headers: authHeader() })
         if (response) {
             console.log(response.data)

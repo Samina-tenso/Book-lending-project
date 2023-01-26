@@ -13,7 +13,7 @@ userRouter.post("/auth/signin/", signin)
 userRouter.get("/my-shelf/:username/get-books", authJWT.verifyToken, getUserBooks)// get list of books by user
 userRouter.get("/my-shelf/:username/get-books-available", authJWT.verifyToken, getAvailableBooks)//add constroller function 
 userRouter.post("/my-shelf/:username/books/add-book", authJWT.verifyToken, joinUserBook)
-userRouter.get("/my-shelf/:username/find-lenders", authJWT.verifyToken, findUsersWithBook)// get list of books by user
+userRouter.get("/my-shelf/:username/find-lenders", authJWT.verifyToken, findUsersWithBook)// get list of books by user-createa application
 
 
 

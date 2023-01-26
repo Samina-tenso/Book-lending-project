@@ -6,7 +6,7 @@ const verifyToken = async (req, res, next) => {
     const authHeader = req.headers.authorization;
     try {
         let token = await authHeader && authHeader.split('Bearer ')[1]
-        console.log(token)
+        console.log(token, "has token")
         if (!token) {
             return res.status(403).send({
                 message: 'No token provided'
@@ -14,6 +14,7 @@ const verifyToken = async (req, res, next) => {
         }
 
         jwt.verify(token, config.secret, (error, user) => {
+
             console.log(config.secret)
             if (error) {
                 console.log(error.message)

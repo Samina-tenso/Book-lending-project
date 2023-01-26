@@ -1,4 +1,5 @@
 'use strict';
+require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const { Sequelize, DataTypes } = require('sequelize');
@@ -10,8 +11,10 @@ const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
+  console.log('sequelize with config variable');
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
+  console.log('sequelize with environment variable');
   sequelize = new Sequelize(`${process.env.PGDATABASE}`, `${process.env.PGUSER}`, `${process.env.PGPASSWORD}`, {
     host: process.env.PGHOST,
     dialect: 'postgres'

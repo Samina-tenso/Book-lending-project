@@ -89,7 +89,7 @@ const findUsersWithBook = async (req, res) => {
         const user_id = req.user.id
         //const lenderArray = [];
         const { id } = req.body
-        const { count, rows } = await userBooks.findAndCountAll({ where: { book_id: id, [Op.not]: { user_id: user_id } }, limit: 10 })
+        const { rows } = await userBooks.findAndCountAll({ where: { book_id: id, [Op.not]: { user_id: user_id } }, limit: 10 })
         if (rows) {
             rows.map((item) => {
                 let lender = item.dataValues.user_id
@@ -98,11 +98,9 @@ const findUsersWithBook = async (req, res) => {
                     lendee_id: user_id,
                     book_id: id,
                 }).then((response) => {
-                    return console.log(response)
+                    res.status(201).send(response)
                 })
             })
-            //Application.create(id, lenderArray, user_id)
-            // res.status(200).send(rows)
         } else {
             res.status(404).send(`no users found for book with id ${book_id}`)
         }
