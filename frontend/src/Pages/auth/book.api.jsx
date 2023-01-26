@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "http://localhost:8080"
+const API_URL = import.meta.env.VITE_BACKEND_URL
 
 function authHeader() {
     const user = JSON.parse(localStorage.getItem('user'))

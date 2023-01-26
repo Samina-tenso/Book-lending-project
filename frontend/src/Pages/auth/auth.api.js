@@ -1,7 +1,6 @@
 
 import axios from "axios";
-const API_URL = "http://localhost:8080/auth/";
-
+const API_URL = import.meta.env.VITE_BACKEND_URL
 const login = async (formData) => {
     try {
         console.log(formData)
