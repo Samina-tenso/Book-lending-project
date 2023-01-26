@@ -13,9 +13,14 @@ import {
 
 export const router = createBrowserRouter([
   {
+    path: "/",
+    element: <Login />
+  },
+  {
     path: "auth/signin",
     element: <Login />
-  }, {
+  },
+  {
     path: "/my-shelf",
     element: <ProtectedRoute />,
     children: [
