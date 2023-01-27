@@ -1,16 +1,13 @@
 const db = require("./models")
 require('dotenv').config();
-const userController = require("./controllers/user.controller")
-const sequelize = require('sequelize')
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const userRouter = require('./routes/user.routes')
 const cors = require("cors");
 const app = express();
-let corsOptions = {
-    origin: "http://localhost:5173"
-};
-app.use(cors(corsOptions));
+
+app.use(cors());
 app.use(function (req, res, next) {
     res.header(
         "Access-Control-Allow-Headers",
