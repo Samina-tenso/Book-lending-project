@@ -7,7 +7,9 @@ const userRouter = require('./routes/user.routes')
 const cors = require("cors");
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://book-lending-project-production.up.railway.app'
+}));
 
 //parse req for content-type application-json
 app.use(bodyParser.json());
