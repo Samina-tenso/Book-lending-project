@@ -54,20 +54,30 @@ export const getAvailableBooks = async () => {
             return response.data
         } else { console.log(error.message) }
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
     }
 }
 //auth does not go through postman works
 export const findUsersBook = async (id) => {
     console.log(id)
     try {
-        console.log(authHeader())
-        const response = await axios.get(`${API_URL}/my-shelf/:username/find-lenders`, id, { headers: authHeader() })
-        if (response) {
-            console.log(response.data)
+        const response = await axios.get(`${API_URL}/my-shelf/:username/find-lenders/${id}`, { headers: authHeader() })
+        if (response.status == 201) {
             return response.data
         } else { console.log(error.message) }
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
+    }
+}
+
+//get applications with username
+export const getUserApplications = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/my-shelf/:username/get-applications`, { headers: authHeader() })
+        if (response.status == 201) {
+            return response.data
+        } else { console.log(error.message) }
+    } catch (error) {
+        console.log(error.message)
     }
 }

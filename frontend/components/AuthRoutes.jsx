@@ -1,12 +1,10 @@
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
-import Auth from "./auth.api";
+import Auth from "../api/auth.api";
 import { Outlet, useNavigate, Link, useParams } from "react-router-dom";
-import { Nav } from 'react-bootstrap';
 export const ProtectedRoute = () => {
     const { username } = useParams()
-    console.log(username)
     const navigate = useNavigate()
     const handleLoggout = () => {
         Auth.logout();

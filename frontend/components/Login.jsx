@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/esm/Form'
 import FormGroup from 'react-bootstrap/FormGroup'
 import FormLabel from 'react-bootstrap/FormLabel';
 import { useState } from 'react';
-import Auth from './auth.api'
+import Auth from '../api/auth.api'
 import { useNavigate, useParams } from 'react-router-dom';
 const Login = () => {
 

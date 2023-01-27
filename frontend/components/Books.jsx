@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Row, Container, Col, Card, Button } from 'react-bootstrap'
-import { useAddBook, useGetBooks } from './book.api'
+import { useAddBook, useGetBooks } from '../api/book.api'
 
 const Books = () => {
     const [books, setBooks] = useState()
@@ -26,18 +26,15 @@ const Books = () => {
             image: image
         }
         try {
-
             useAddBook(book).then((response) => {
                 if (response)
                     console.log(response)
                 return setMessage(`Book titled: ${title} has been added to your books`)
             }) //send req to create book for user
-
         } catch (error) {
             console.log(error.message)
         }
     }
-    console.log(books)
     return (
         <>
             <h1> Books </h1>

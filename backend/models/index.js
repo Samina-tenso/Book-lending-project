@@ -41,13 +41,15 @@ db.books.belongsToMany(db.users, { through: db.userBooks, foreignKey: 'book_id',
 // db.users.hasMany(db.userBooks)
 // db.userBooks.belongsTo(db.users)
 db.books.hasMany(db.userBooks, { foreignKey: 'id' })
-db.userBooks.belongsTo(db.books, { foreignKey: 'book_id' })
+db.userBooks.belongsTo(db.books, { foreignKey: 'id' })
 
-//application table
-// db.users.belongsToMany(db.books, { through: applicationModel, foreignKey: 'user_id', as: "books" })
-// db.books.belongsToMany(db.users, { through: applicationModel, foreignKey: 'book_id', as: "users" })
-// db.users.belongsToMany(db.users, { through: applicationModel, foreignKey: 'lender_id', otherKey: 'lendee_id', as: "lender" })
-// db.users.belongsToMany(db.users, { through: applicationModel, foreignKey: 'lendee_id', otherKey: 'lender_id', as: "lendee" })
+// db.application.belongs(db.books, { foreignKey: 'id' })
+// db.books.belongsTo(db.application, { foreignKey: 'id', as: 'books-application' })
+
+// //application table
+// db.books.belongsToMany(db.users, { through: db.application, foreignKey: 'book_id', as: 'books' })
+// db.users.belongsToMany(db.users, { through: db.application, foreignKey: 'lender_id', otherKey: 'lendee_id', as: 'lender' })
+// db.users.belongsToMany(db.users, { through: db.application, foreignKey: 'lendee_id', otherKey: 'lender_id', as: 'lendee' })
 
 fs
   .readdirSync(__dirname)

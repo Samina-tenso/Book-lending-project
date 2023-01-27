@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getMyBooks } from "./book.api"
+import { getMyBooks } from "../api/book.api"
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
 const MyBooks = () => {
@@ -21,7 +21,7 @@ const MyBooks = () => {
                 <Container >
                     <Row>{myBooks.map((book) => (
                         <Col>
-                            <Card className='m-2'>
+                            <Card>
                                 <Card.Body>
                                     <Card.Title>{book.title}</Card.Title>
                                     <Card.Img variant="top" src={book.image} />

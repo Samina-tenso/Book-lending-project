@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 module.exports = (sequelize) => {
-    const Application = sequelize.define('request', {
+    const Application = sequelize.define('application', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,

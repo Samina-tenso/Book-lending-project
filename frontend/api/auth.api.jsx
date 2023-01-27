@@ -5,7 +5,7 @@ const API_URL = import.meta.env.VITE_BACKEND_URL
 const signup = async (formData) => {
     try {
         console.log(formData)
-        return axios.post(API_URL + "signup", formData).then((response) => {
+        return axios.post(API_URL + "/signup", formData).then((response) => {
             if (response.data.accessToken) {
                 localStorage.setItem("user", JSON.stringify(response.data))
                 return response.data
@@ -22,7 +22,7 @@ const signup = async (formData) => {
 const signin = async (formData) => {
     try {
         console.log(formData)
-        return axios.post(API_URL + "signin", formData).then((response) => {
+        return axios.post(API_URL + "/signin", formData).then((response) => {
             if (response.data.accessToken) {
                 localStorage.setItem("user", JSON.stringify(response.data))
                 return response.data

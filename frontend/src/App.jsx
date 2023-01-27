@@ -1,19 +1,15 @@
-import Login from './Pages/auth/Login'
-import Myshelf from './Pages/auth/Myshelf';
-import Books from './Pages/auth/Books';
-import BooksToLend from './Pages/auth/BooksToLend';
-import Registration from './Pages/auth/Registration';
-import { ProtectedRoute } from './Pages/auth/AuthRoutes'
-import Home from './Pages/auth/Home';
+import Login from '../components/Login'
+import MyShelf from '../components/MyShelf'
+import Books from '../components/Books';
+import BooksToLend from '../components/BooksToLend';
+import Registration from '../components/Registration';
+import { ProtectedRoute } from '../components/AuthRoutes'
+import Home from '../components/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import './App.css'
 import {
-  createBrowserRouter, RouterProvider
+  createBrowserRouter
 } from 'react-router-dom'
-
-
-
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +30,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: ":username",
-        element: < Myshelf />
+        element: < MyShelf />
       },
       {
         path: ":username/books",
@@ -45,7 +41,6 @@ export const router = createBrowserRouter([
         element: <BooksToLend />
       }
     ],
-
   }
 ])
 function App() {
