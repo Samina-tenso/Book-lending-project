@@ -8,13 +8,7 @@ const cors = require("cors");
 const app = express();
 
 app.use(cors());
-app.use(function (req, res, next) {
-    res.header(
-        "Access-Control-Allow-Headers",
-        "x-access-token, Origin, Content-Type, Accept"
-    );
-    next();
-});
+
 //parse req for content-type application-json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
